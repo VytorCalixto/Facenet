@@ -17,7 +17,7 @@ class Relation {
     public RelationType getType() {
         return type;
     }
-
+    
     public Calendar getStartDate() {
         return startDate;
     }
