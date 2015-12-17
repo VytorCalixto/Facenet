@@ -1,8 +1,9 @@
 import java.util.Observable;
 import java.util.Calendar;
 import java.util.ArrayList;
+import java.util.List;
 
-abstract class User extends Observable {
+class User extends Observable {
     protected String name;
     protected String login;
     protected Calendar createdAt;
@@ -12,11 +13,7 @@ abstract class User extends Observable {
     public User() {
         this.createdAt = Calendar.getInstance();
         publications = new ArrayList<Publication>();
-    }
-
-    @Override
-    public void update(Observable subject, Object arg1) {
-        return;
+        timeline = new Timeline(this);
     }
 
     public String getName() {
@@ -35,6 +32,10 @@ abstract class User extends Observable {
         return publications;
     }
 
+    public Timeline getTimeline() {
+        return timeline;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -45,5 +46,16 @@ abstract class User extends Observable {
 
     public void addPublication(Publication p) {
         publications.add(p);
+        notifyAllObservers();
     }
+
+    public void setTimeline(Timeline timeline) {
+        this.timeline = timeline;
+    }
+
+    public void notifyAllObservers() {
+        setChanged();
+        notifyObservers();
+    }
+
 }

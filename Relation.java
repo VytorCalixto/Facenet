@@ -5,9 +5,16 @@ class Relation {
     private RelationType type;
     private Calendar startDate;
     private Calendar endDate;
+    private Person user;
 
     public Relation() {
         startDate = Calendar.getInstance();
+    }
+
+    public Relation(Person user, RelationType type) {
+        startDate = Calendar.getInstance();
+        this.user = user;
+        this.type = type;
     }
 
     public short getAffinity() {
@@ -17,13 +24,17 @@ class Relation {
     public RelationType getType() {
         return type;
     }
-    
+
     public Calendar getStartDate() {
         return startDate;
     }
 
     public Calendar getEndDate() {
         return endDate;
+    }
+
+    public Person getUser() {
+        return user;
     }
 
     public void setAffinity(short affinity) {
@@ -40,5 +51,9 @@ class Relation {
 
     public void setEndDate(Calendar endDate) {
         this.endDate = endDate;
+    }
+
+    public void setUser(Person user) {
+        this.user = user;
     }
 }
