@@ -28,13 +28,17 @@ class Person extends User {
     }
 
     public void addRelation(Relation r) {
-        relations.add(r);
-        r.getUser().addObserver(this.timeline);
+        if(!relations.contains(r)) {
+            relations.add(r);
+            r.getUser().addObserver(this.timeline);
+        }
     }
 
     public void removeRelation(Relation r) {
-        relations.remove(r);
-        r.getUser().deleteObserver(this.timeline);
+        if(relations.contains(r)) {
+            relations.remove(r);
+            r.getUser().deleteObserver(this.timeline);
+        }
     }
 
     public void joinGroup(Group g) {
@@ -45,5 +49,6 @@ class Person extends User {
     public void leaveGroup(Group g) {
         groups.remove(g);
         g.removeMember(this);
+        System.out.println(name + " saiu do grupo " + g.getName());
     }
 }

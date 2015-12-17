@@ -30,11 +30,11 @@ class Timeline implements Observer {
     }
 
     public void printTimeline() {
-        System.out.println(" --- Timeline do " + user.getName() + " --- ");
+        System.out.println(" --- Timeline de " + user.getName() + " --- ");
         List<Publication> reverse = new ArrayList<Publication>(publications);
         Collections.reverse(reverse);
         for (Publication p : reverse) {
-            System.out.println("--------------------------------------------");
+            System.out.println("------------------------------------------------------");
             if(p.getType() == PublicationType.PENSAMENTO) {
                 System.out.println(p.getOwner().getName() + " disse: ");
                 System.out.println(p.countLikes() + " curtiram. " + p.countDislikes() + " não curtiram.");
@@ -48,8 +48,9 @@ class Timeline implements Observer {
                 System.out.println(p.getOwner().getName() + " " + p.getContent());
 
             }
-            System.out.println("--------------------------------------------");
+            System.out.println("------------------------------------------------------");
         }
+        System.out.println("\n\n");
     }
 
     public void like(Publication p) {
@@ -65,14 +66,20 @@ class Timeline implements Observer {
     public void comment(Publication p, String comment) {
         p.addRelated(new Publication(PublicationType.COMENTARIO, user, comment));
         user.addPublication(new Publication(PublicationType.COMENTARIO, user, "comentou uma publicação de " + p.getOwner().getName()));
-        user.notifyAllObservers();
     }
 
     public void post(String post) {
-        user.addPublication(new Publication(PublicationType.PENSAMENTO, user, post));
+        Publication p = new Publication(PublicationType.PENSAMENTO, user, post);
+        user.addPublication(p);
+        if(!publications.contains(p)) {
+            publications.add(p);
+        }
     }
 
     public void post(Publication p) {
         user.addPublication(p);
+        if(!publications.contains(p)) {
+            publications.add(p);
+        }
     }
 }

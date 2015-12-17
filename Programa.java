@@ -21,8 +21,9 @@ class Programa {
 
         Publication pub = new Publication(PublicationType.PENSAMENTO, p1, "Salve-nos Obi-Wan, você é nossa última esperança.");
         p1.getTimeline().post(pub);
-        p2.getTimeline().like(pub);
         p2.getTimeline().comment(pub, "ARRRRRRRRRR ARRR ERRRR");
+        p2.getTimeline().like(pub);
+        p2.getTimeline().post("UORRRRRG AURRRRRH");
 
         pub = new Publication(PublicationType.PENSAMENTO, g1, "Perdemos a base de Hoth!");
         g1.getTimeline().post(pub);
